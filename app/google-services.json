@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085179377435",
+    "project_id": "thmlocals",
+    "storage_bucket": "thmlocals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085179377435:android:8d55e85825a4eeb688c5be",
+        "android_client_info": {
+          "package_name": "com.example.thmlocals3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085179377435-m75h2k9ov3nb124pbp3kqle2krnvm64b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpfhpzXMTpLCaJLYR16Vzx1z49U1_wECU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085179377435-m75h2k9ov3nb124pbp3kqle2krnvm64b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
