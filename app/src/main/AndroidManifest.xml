@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.THMLocals3">
-        <activity android:name=".MainChat"></activity>
         <activity android:name=".Module"></activity>
         <activity android:name=".Dashboard" />
         <activity android:name=".MainActivity">
@@ -19,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Chat_Room" />
 
         <meta-data
             android:name="preloaded_fonts"
