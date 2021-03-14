@@ -14,12 +14,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Declare FB Reference to be able to collect users ID
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-
-
 
 
     @Override
@@ -81,11 +81,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            // Sign in success, update UI with the signed in user`s information
-
+                            // Sign in success, update UI with the signed-in user`s information
                             Log.d(TAG, "signInAnonymously:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            // we should add user to our database here with writeMethod
+                            String userId = mAuth.getCurrentUser().getUid();
+                            writeNewUser(userId);
+
                         } else {
                             // if sign in fails, display a msg to the user
 //                            Log.w(TAG, "signInAnonymously:failure");
@@ -93,17 +96,23 @@ public class MainActivity extends AppCompatActivity {
 //                                    Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-
-
                     }
                 });
     }
 
     public void writeNewUser(String userId) {
-        User user = new User(userId);
-        mDatabase.child("users").child(userId).setValue(user);
-    }
+ //  we need a Counter method to generate numbers everytime a user log in (Result in DB : userID1, userId2, userId3, userId4 ...)
+        
+        //User user = new User(userId); // in case we use User Class
+        mDatabase.child("Users").child("userID").setValue(userId).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("TAG", "onSuccess: User Profile is created for " + userId);
 
+            }
+        });
+
+    }
 
 }
 

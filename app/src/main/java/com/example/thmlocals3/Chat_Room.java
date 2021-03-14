@@ -27,7 +27,7 @@ public class Chat_Room extends AppCompatActivity {
     private Button mBtnSend;
     private EditText mInputMsg;
     private TextView mChatConversation;
-    private String mGroupName, user_name;
+    private String mGroupName, userId;
     private DatabaseReference root;
     private String temp_key;
 
@@ -41,8 +41,8 @@ public class Chat_Room extends AppCompatActivity {
         mInputMsg = findViewById(R.id.inputMsg);
         mChatConversation = findViewById(R.id.textView);
 
-        user_name = getIntent().getExtras().get("user_name").toString();
-        mGroupName = getIntent().getExtras().get("mGroupName").toString();
+        userId = getIntent().getStringExtra("userId");
+        mGroupName = getIntent().getStringExtra("mGroupName");
         setTitle("Group: " + mGroupName);
 
         root = FirebaseDatabase.getInstance().getReference().child(mGroupName);
@@ -56,9 +56,10 @@ public class Chat_Room extends AppCompatActivity {
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();
-                map2.put("name", user_name);
+                map2.put("userId", userId);
                 map2.put("msg", mInputMsg.getText().toString());
                 message_root.updateChildren(map2);
+                mInputMsg.setText("");
             }
         });
 
@@ -89,15 +90,15 @@ public class Chat_Room extends AppCompatActivity {
            }
        });
     }
-
+private String chat_msg, chat_userId;
     private void append_child_conversation(DataSnapshot snapshot) {
         Iterator i = snapshot.getChildren().iterator();
 
         while(i.hasNext()) {
-//            chat_msg = (snapshot)i.next().getValue();
-//            chat_user_name = (snapshot)i.next().getValue();
-//
-//            mChatConversation.append(chat_user_name + " : " + chat_msg + " \n");
+            chat_msg = (String) ((DataSnapshot) i.next()).getValue();
+            chat_userId = (String) ((DataSnapshot)i.next()).getValue();
+
+            mChatConversation.append(chat_userId + " : " + chat_msg + " \n");
         }
     }
 }
