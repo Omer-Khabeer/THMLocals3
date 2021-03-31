@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/msg_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/baloo"
+        android:background="@drawable/my_mssage"
+        android:padding="10dp"
+        android:elevation="2dp"
+        android:layout_alignParentRight="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+
