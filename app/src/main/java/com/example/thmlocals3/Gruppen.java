@@ -3,7 +3,9 @@ package com.example.thmlocals3;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,7 +45,7 @@ public class Gruppen extends AppCompatActivity {
         mGroupName = findViewById(R.id.GruppeName);
         mAddGroup = findViewById(R.id.addGroup);
         mListview = findViewById(R.id.listOfGroups);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfGroups);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.mytextview, listOfGroups);
         mListview.setAdapter(arrayAdapter);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -84,8 +86,9 @@ public class Gruppen extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Chat_Room.class);
                 intent.putExtra("mGroupName", ((TextView)view).getText().toString());
                 intent.putExtra("userId", userId);
-           startActivity(intent);
+                startActivity(intent);
             }
         });
+
     }
 }
